@@ -1,4 +1,4 @@
-transformers
+transformers>=4.30.0
 torch
 matplotlib
 numpy
@@ -11,3 +11,4 @@ matplotlib
 seaborn
 scikit-learn
 streamlit
+
