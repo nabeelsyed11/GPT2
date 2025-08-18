@@ -52,7 +52,7 @@ Start the app:
 python app.py
 ```
 
-Visit `http://127.0.0.1:5000` in your browser to interact with the model.
+Visit `https://augzkpwcujv4w8spusneak.streamlit.app/` in your browser to interact with the model.
 
 ## Requirements
 
