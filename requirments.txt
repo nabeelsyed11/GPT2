@@ -1,13 +1,5 @@
 streamlit
-transformers>=4.30.0
-torch
-matplotlib
-numpy
-torch
 transformers
-datasets
-numpy
-pandas
+torch
 matplotlib
-seaborn
-scikit-learn
+numpy
