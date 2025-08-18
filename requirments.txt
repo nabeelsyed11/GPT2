@@ -3,3 +3,12 @@ torch
 matplotlib
 numpy
 jupyter
+torch
+transformers
+datasets
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+streamlit
