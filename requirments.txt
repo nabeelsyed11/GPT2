@@ -2,7 +2,6 @@ transformers
 torch
 matplotlib
 numpy
-jupyter
 torch
 transformers
 datasets
