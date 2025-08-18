@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(page_title="LLM Playground", page_icon="🧠")
 from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForCausalLM, pipeline
 import torch
 import matplotlib.pyplot as plt
@@ -75,3 +76,4 @@ ax.bar(labels, scores, color=['skyblue', 'orange', 'green'])
 ax.set_ylabel("Performance Score")
 ax.set_title("Comparison of Language Models")
 st.pyplot(fig)
+
