@@ -1,3 +1,4 @@
+streamlit
 transformers>=4.30.0
 torch
 matplotlib
@@ -10,5 +11,3 @@ pandas
 matplotlib
 seaborn
 scikit-learn
-streamlit
-
