@@ -1,26 +1,29 @@
 import streamlit as st
-st.set_page_config(page_title="LLM Playground", page_icon="🧠")
 from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForCausalLM, pipeline
 import torch
 import matplotlib.pyplot as plt
 import numpy as np
 
+st.set_page_config(page_title="LLM Playground", page_icon="🧠")
 st.title("🧠 LLM Playground - BERT / DistilBERT / GPT-2")
+
+@st.cache_resource(show_spinner=False)
+def load_model_and_tokenizer(name: str):
+    if "gpt2" in name.lower():
+        tok = AutoTokenizer.from_pretrained(name)
+        mdl = AutoModelForCausalLM.from_pretrained(name)
+    else:
+        tok = AutoTokenizer.from_pretrained(name)
+        mdl = AutoModelForMaskedLM.from_pretrained(name)
+    return tok, mdl
 
 # Model Selection
 model_choice = st.selectbox("Choose a Language Model", ["distilbert-base-uncased", "bert-base-uncased", "gpt2"])
-
-if "gpt2" in model_choice:
-    tokenizer = AutoTokenizer.from_pretrained(model_choice)
-    model = AutoModelForCausalLM.from_pretrained(model_choice)
-else:
-    tokenizer = AutoTokenizer.from_pretrained(model_choice)
-    model = AutoModelForMaskedLM.from_pretrained(model_choice)
+tokenizer, model = load_model_and_tokenizer(model_choice)
 
 st.subheader("🔹 Try it Out")
 
 if "gpt2" in model_choice:
-    # Text Generation
     input_text = st.text_input("Enter a prompt", "Artificial Intelligence will")
     if st.button("Generate Text"):
         generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
@@ -28,7 +31,6 @@ if "gpt2" in model_choice:
         st.write("**Generated Text:**")
         st.success(text)
 else:
-    # Cloze Task
     input_text = st.text_input("Enter a masked sentence", "The capital of France is [MASK].")
     if st.button("Fill Mask"):
         fill_mask = pipeline("fill-mask", model=model, tokenizer=tokenizer)
@@ -37,7 +39,6 @@ else:
         for r in result:
             st.write(f"- {r['token_str']} (score: {r['score']:.4f})")
 
-# Pseudo Perplexity
 st.subheader("📊 Pseudo-Perplexity Evaluation")
 sentence = st.text_input("Enter a sentence", "Natural language processing enables AI to understand humans.")
 
@@ -66,7 +67,6 @@ if st.button("Evaluate Perplexity"):
     else:
         st.warning("Perplexity not supported for causal LM like GPT-2.")
 
-# Visualization Example
 st.subheader("📈 Model Comparison (Example Scores)")
 labels = ["DistilBERT", "BERT", "GPT-2"]
 scores = [0.85, 0.89, 0.92]
@@ -76,4 +76,3 @@ ax.bar(labels, scores, color=['skyblue', 'orange', 'green'])
 ax.set_ylabel("Performance Score")
 ax.set_title("Comparison of Language Models")
 st.pyplot(fig)
-
