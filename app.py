@@ -17,8 +17,12 @@ def load_model_and_tokenizer(name: str):
         mdl = AutoModelForMaskedLM.from_pretrained(name)
     return tok, mdl
 
-# Model Selection
-model_choice = st.selectbox("Choose a Language Model", ["distilbert-base-uncased", "bert-base-uncased", "gpt2"])
+# Model Selection (added tiny models for Streamlit Cloud testing)
+model_choice = st.selectbox(
+    "Choose a Language Model",
+    ["distilbert-base-uncased", "bert-base-uncased", "gpt2", 
+     "sshleifer/tiny-distilbert-base-uncased", "sshleifer/tiny-gpt2"]
+)
 tokenizer, model = load_model_and_tokenizer(model_choice)
 
 st.subheader("🔹 Try it Out")
