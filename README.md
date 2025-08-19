@@ -80,4 +80,4 @@ This project is licensed under the MIT License — see the `LICENSE` file for de
 
 ## Contact
 
-Created by Nabeel Syed. Reach out via GitHub profile for questions or collaboration!
+Created by Nabeel Syed. Reach out via GitHub profile for questions or collaboration!.
